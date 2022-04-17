@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static io.getarrays.server.enumeration.Status.SERVER_UP;
 import static java.time.LocalTime.now;
@@ -26,7 +27,8 @@ public class ServerController {
     private final ServerServiceImpl serverService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getServers(){
+    public ResponseEntity<Response> getServers() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1); //loading DATA
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
