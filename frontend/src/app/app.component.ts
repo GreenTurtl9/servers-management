@@ -112,5 +112,15 @@ export class AppComponent implements OnInit {
   }
 
   printReport(): void {
+    //window.print(); //print as pdf
+    let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('servers');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'server-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 }
